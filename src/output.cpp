@@ -1,6 +1,6 @@
-#include "include/LongNumber.hpp"
+#include "longnumber.hpp"
 
-namespace LongNumber {
+namespace longnumber {
         std::string LongNumber::get_binary() const{
         std::string result;
         for (int i = integer.size() - 1; i >= 0; i--) {
@@ -93,7 +93,7 @@ namespace LongNumber {
             }
             cur_deg = multiply_decimal_by_two(cur_deg);
         }
-        while (right.size() > rounding_pos + 1) {
+        while (right.size() >= rounding_pos + 1) {
             right.pop_back();
         }
         bool plus = (right.size() > rounding_pos ? (right[rounding_pos] >= 5) : 0);

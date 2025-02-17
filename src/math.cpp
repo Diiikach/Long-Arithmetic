@@ -1,6 +1,9 @@
-#include "include/LongNumber.hpp"
+#include <unistd.h>
+#include "longnumber.hpp"
 
-namespace LongNumber {
+#define KARATSUBA_LIMIT 50
+
+namespace longnumber {
     bool LongNumber::operator==(const LongNumber &other) const {
         return sign == other.sign && this->abs_eq(other);
     }
@@ -23,7 +26,7 @@ namespace LongNumber {
     }
 
     bool LongNumber::operator>(const LongNumber& other) const {
-        return !(*this < other && *this == other);
+        return !(*this < other || *this == other);
     }
 
     LongNumber LongNumber::operator+(const LongNumber& other) const {
@@ -47,6 +50,21 @@ namespace LongNumber {
     }
 
     LongNumber LongNumber::operator*(const LongNumber& other) const {
+        // if (std::max(this->integer.size() + this->fraction.size(), other.integer.size() + other.fraction.size()) > KARATSUBA_LIMIT) {
+        //     std::vector<bit> ab, cd;
+        //     for (int i = this->fraction.size() - 1; i >= 0; i--) {
+        //         ab.push_back(this->fraction[i]);
+        //     }
+        //     for (int i = 0; i < this->integer.size(); i++) {
+        //         ab.push_back(this->integer[i]);
+        //     }
+        //     for (int i = other.fraction.size() - 1; i >= 0; i--) {
+        //         cd.push_back(other.fraction[i]);
+        //     }
+        //     for (int i = 0; i < other.integer.size(); i++) {
+        //         cd.push_back(other.integer[i]);
+        //     }
+        // }
         LongNumber cur_deg = *this;
         LongNumber res(0);
         int start_pos = -1;
@@ -93,7 +111,7 @@ namespace LongNumber {
             left_bound = LongNumber(0);
         }
         LongNumber abs_cur = this->abs();
-        for (int _ = 0; _ < 100; _++) {
+        for (int _ = 0; _ < 344; _++) {
             LongNumber mid = (left_bound + right_bound).right_shift();
             if ((mid * other).abs() < abs_cur) {
                 left_bound = mid;

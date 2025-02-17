@@ -1,8 +1,8 @@
-#include "include/LongNumber.hpp"
+#include "longnumber.hpp"
 #include <iomanip>
 
 
-namespace LongNumber {
+namespace longnumber {
     LongNumber::LongNumber(std::vector<bit> integer, std::vector<bit> fraction, const Sign s = POS, unsigned ac) {
         this->integer = std::move(integer);
         this->fraction = std::move(fraction);

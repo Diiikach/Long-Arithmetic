@@ -1,29 +1,34 @@
 #include <iostream>
 #include <vector>
 
-using bit = char;
+using bit = unsigned char;
 
 #ifndef LN_IN
 #define LN_IN
 
 
-namespace LongNumber {
+namespace longnumber {
     enum Sign {
         NEG,
         POS,
     };
 
+    class Unit {
+    };
+
     class LongNumber {
     public:
-        unsigned rounding_pos = 10;
-        unsigned ac {50};
+        static inline unsigned rounding_pos = 20;
+        unsigned ac {400};
         Sign sign = POS; // default value for non-negative numbers
         std::vector<bit> integer;
         std::vector<bit> fraction;
 
         LongNumber(std::vector<bit> integer, std::vector<bit> other, Sign s, unsigned ac = 40);
-
         explicit LongNumber(long double num);
+
+        ~LongNumber() = default;
+
 
         bool operator<(const LongNumber& other) const;
         bool operator>(const LongNumber& other) const;
@@ -36,6 +41,7 @@ namespace LongNumber {
         LongNumber operator*(const LongNumber& other) const;
         LongNumber operator/(const LongNumber& other) const;
 
+        LongNumber& operator=(const LongNumber& other) = default;
         LongNumber& operator+=(const LongNumber& other);
         LongNumber& operator-=(const LongNumber& other);
         LongNumber& operator*=(const LongNumber& other);
@@ -44,6 +50,7 @@ namespace LongNumber {
 
         [[nodiscard]] std::string get_decimal() const;
         [[nodiscard]] std::string get_binary() const;
+
 
     private:
         static std::vector<char> divide_decimal_by_two(std::vector<char>& num);
@@ -57,12 +64,10 @@ namespace LongNumber {
         [[nodiscard]] LongNumber dif(const LongNumber& other) const;
         [[nodiscard]] LongNumber left_shift() const;
         [[nodiscard]] LongNumber right_shift() const;
-
         void remove_zeros();
-
     };
 
-    inline LongNumber operator""_longnum(long double number) {
+    inline LongNumber operator""_longnum(const long double number) {
         return LongNumber(number);
     }
 } // namespace LongNumber

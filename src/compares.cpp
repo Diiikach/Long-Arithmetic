@@ -1,6 +1,6 @@
-#include "include/LongNumber.hpp"
+#include "longnumber.hpp"
 
-namespace LongNumber {
+namespace longnumber {
     bool LongNumber::abs_less(const LongNumber& other) const {
         // compares absolute values of tho long numbers like |this| < |other|
         int si1 = integer.size(), si2 = other.integer.size(); // size  of integer array 1, 2

@@ -1,6 +1,6 @@
-#include "include/LongNumber.hpp"
+#include "longnumber.hpp"
 
-namespace LongNumber {
+namespace longnumber {
    LongNumber LongNumber::sum(const LongNumber& other) const {
         int max_n = std::max(integer.size(), other.integer.size());
         int max_m = std::max(fraction.size(), other.fraction.size());
