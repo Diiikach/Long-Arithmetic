@@ -1,0 +1,13 @@
+.idea
+.vscode
+a.out
+CMakeLists.txt
+cmake-build-debug
+main.o
+math.o
+my_program
+output.o
+pi.sh
+pi_number.out
+pinumber
+test.out
