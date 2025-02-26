@@ -19,9 +19,6 @@ test: $(GTEST_LIB_DIR)/libgtest.a
 	$(CXX) $(CXXFLAGS) $(wildcard src/*.cpp) tests/main.cpp $(GTEST_LIBS) -o test.out
 	./test.out
 
-$(GTEST_LIB_DIR)/libgtest.a:
-	$(MAKE) -C $(GTEST_DIR) build
-
 clean:
 	rm -f pi_number.out test.out
 
