@@ -15,9 +15,10 @@ pi:
 	$(CXX) $(CXXFLAGS) $(wildcard src/*.cpp) pi_number/pi_number.cpp -o pi_number.out
 	./pi_number.out
 
-test: $(GTEST_LIB_DIR)/libgtest.a
+test:
 	$(CXX) $(CXXFLAGS) $(wildcard src/*.cpp) tests/main.cpp $(GTEST_LIBS) -o test.out
 	./test.out
+
 
 clean:
 	rm -f pi_number.out test.out
